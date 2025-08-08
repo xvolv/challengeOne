@@ -7,13 +7,33 @@ import { useSelector, useDispatch } from "react-redux";
 const Greet = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [inputValue, setInput] = React.useState("");
+  const [greeting, setGreeting] = React.useState("");
 
   const name = useSelector((state: RootState) => state.name.name);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(setName(inputValue));
+
+    try {
+      const res = await fetch("/api/greet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: inputValue }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setGreeting("Error: " + data.error);
+      } else {
+        setGreeting(data.message);
+      }
+    } catch {
+      setGreeting("Network error or server unavailable");
+    }
   };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
@@ -22,6 +42,10 @@ const Greet = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 text-white">
       {/* Header */}
       <header className="text-center mb-10">
+        <small>
+          {" "}
+          {greeting && <p className="mt-4 text-indigo-400">{greeting}</p>}
+        </small>
         <h1 className="text-5xl font-extrabold tracking-tight mb-4">
           Your Day, Your Greeting {name ? `, ${name}` : ""}
         </h1>
