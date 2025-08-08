@@ -1,12 +1,4 @@
-let storedName = "";
-export const GET = async () => {
-  return new Response(JSON.stringify({ name: storedName }), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
+
 
 export const POST = async (request: Request) => {
   try {
