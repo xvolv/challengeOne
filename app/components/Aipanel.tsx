@@ -92,7 +92,7 @@ const AiPanel = () => {
             AI Assistant
           </h2>
         </div>
-        <p className="text-xs text-slate-400 mt-1">Ask me anything, I'm here to help!</p>
+        <p className="text-xs text-slate-400 mt-1">Ask me anything, I&apos;m here to help!</p>
       </div>
 
       {/* Messages */}

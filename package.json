@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@huggingface/inference": "^2.8.0",
+    "@prisma/client": "^6.13.0",
     "@reduxjs/toolkit": "^2.8.2",
     "framer-motion": "^12.23.12",
     "next": "15.4.6",
+    "prisma": "^6.13.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-intersection-observer": "^9.16.0",
